@@ -4,7 +4,7 @@ This dashboard will allow you to search for a city to get it´s current weatehr 
 Please read the usage indications below before using it.
 ```
 
-[Weather Dashboard App](https://jaime-a-esquivel-a.github.io/WeatherDashboard/Index.html)
+[Weather Dashboard App](https://jaime-a-esquivel-a.github.io/WeatherDashboard/index.html)
 
 ## Usage
 
