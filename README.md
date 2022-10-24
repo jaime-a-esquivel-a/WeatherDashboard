@@ -4,7 +4,7 @@ This dashboard will allow you to search for a city to get it´s current weatehr 
 Please read the usage indications below before using it.
 ```
 
-[Weather Dashboard App]()
+[Weather Dashboard App](https://jaime-a-esquivel-a.github.io/WeatherDashboard/Index.html)
 
 ## Usage
 
@@ -17,6 +17,6 @@ Please read the usage indications below before using it.
 * If you want to erase your search history just click on the "Clear History" button.  
     <img src="assets/images/ClearHistory.png" alt="Clear History button" />
 * If we are unable to find the city you're searching for a message will appear at the top "City NOT found".  
-    <img src="assets/images/Notfound.png" alt="City NOT found" />
+    <img src="assets/images/ErrMsg.png" alt="City NOT found" />
 
 
