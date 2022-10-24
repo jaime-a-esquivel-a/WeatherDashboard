@@ -1,17 +1,12 @@
-//8317f2907e7792815e65ac40b4c293be
-//https://api.openweathermap.org/data/2.5/weather?q=London&appid={API key}
-//how to display the weather icon:
-//var iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
-
 var weatherContainer  = $('#WeatherZone');
 var forecastContainer = $('#ForecastZone');
 
+//print search history from local storage
 printSearchHistory();
 
-//getForecast('Tulum'); //erase
 
+//get name of city at input
 function getCity(){
-
   var lv_city = $('#InputCity').val();
   $('#InputCity').val('');
   lv_city = capitalizeFirstLetter(lv_city);
@@ -19,6 +14,7 @@ function getCity(){
 
 }
 
+//get current weather, this function also triggers forecast & search history.
 function getWeather(lp_city){
 
 lp_city = capitalizeFirstLetter(lp_city);
@@ -31,12 +27,6 @@ fetch('https://api.openweathermap.org/data/2.5/weather?q='+lp_city+'&appid=8317f
 
     if ( data.cod == 200 ){
 
-      console.log(data);
-      console.log('City: ' + data.name);
-      console.log('Temp: ' + data.main.temp + ' \u2103');
-      console.log(data.wind.speed + ' m/s');
-      console.log('Humidity: ' + data.main.humidity + '%');
-
       weatherContainer.html('');
 
       var divcol = document.createElement('div');
@@ -47,7 +37,6 @@ fetch('https://api.openweathermap.org/data/2.5/weather?q='+lp_city+'&appid=8317f
       divcardhdr.className = 'card-header';
       var divcardbdy = document.createElement('div');
       divcardbdy.className = 'card-body';
-
       var city = document.createElement('h3');
       city.textContent = data.name;
       var nowText = document.createElement('h5');
@@ -69,22 +58,20 @@ fetch('https://api.openweathermap.org/data/2.5/weather?q='+lp_city+'&appid=8317f
       divcardbdy.append(nowTemp);
       divcardbdy.append(nowWind);
       divcardbdy.append(nowHumidity);
-
       divcardhdr.append(city);
       divcard.append(divcardhdr);
       divcard.append(divcardbdy);
       divcol.append(divcard);
-
       weatherContainer.append(divcol);
 
+      //call local storage
       localStoreCity(data.name);
+      //call forecast
       getForecast(data.name);
 
     }else{
 
-      console.log(data.cod);
-      console.log(data.message);
-
+      //Print 'City NOT found' message
       weatherContainer.html('');
       forecastContainer.html('');
 
@@ -111,6 +98,7 @@ fetch('https://api.openweathermap.org/data/2.5/weather?q='+lp_city+'&appid=8317f
 
 }
 
+//get 5 day forecast at 12:00 hrs for a better representation of the forecast at a given day
 function getForecast(lp_city){
 
   $('#ForecastZone').empty();
@@ -132,9 +120,6 @@ function getForecast(lp_city){
         for (var j = 0; j < data.list.length; j++){
     
           if (data.list[j].dt_txt == forecast){
-
-            console.log(data.list[j]);
-
 
             var divcol = document.createElement('div');
             divcol.className = 'col';
@@ -185,6 +170,7 @@ function getForecast(lp_city){
 
 }
 
+//Save in local storage the list of cities searched by user.
 function localStoreCity(lp_city){
 
   console.log(lp_city);
@@ -214,6 +200,7 @@ function localStoreCity(lp_city){
 
 }
 
+//print list of searched sities on the sidebar
 function printSearchHistory(){
 
 
@@ -239,6 +226,7 @@ function printSearchHistory(){
 
 }
 
+//Clear search histoty list
 function clearHistory(){
 
   localStorage.removeItem('lsa_Cities');
@@ -247,6 +235,7 @@ function clearHistory(){
 
 }
 
+//Capitalize city input to avoid errors in OpenWeather service
 function capitalizeFirstLetter(string){
 
   string = string.toLowerCase();
